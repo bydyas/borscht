@@ -1,5 +1,7 @@
 *.session
+*.session-journal
 constants.py
+*.temp.txt
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

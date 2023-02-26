@@ -1,4 +1,5 @@
 from session import Session
+from time import sleep
 import constants
 from utils import clear, read_users_template
 
@@ -6,7 +7,13 @@ from utils import clear, read_users_template
 def add_users():
     channel = client.get_entity(input("Enter channel link or ID: "))
     users = [client.get_entity(user) for user in read_users_template()]
-    session.add_users_to_chat(channel, users)
+
+    if not len(users):
+        print("Users list is empty!")
+        sleep(2)
+        get_options()
+    else:
+        session.add_users_to_chat(channel, users)
 
 
 def get_options():
@@ -17,7 +24,13 @@ def get_options():
     user_option = input("Enter option's number: ")
 
     if user_option == "1":
-        add_users()
+        try:
+            add_users()
+            print("Users've been invited")
+            sleep(2)
+            get_options()
+        except e:
+            print(e)
     else:
         get_options()
 

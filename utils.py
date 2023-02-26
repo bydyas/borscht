@@ -12,9 +12,13 @@ def clear():
 
 def read_users_template():
     curr_dir = path.abspath(getcwd())
-    template = rf"{curr_dir}\users.txt"
+    template = "users.temp.txt"
+    data = rf"{curr_dir}/{template}"
     users = []
-    with open(template) as f:
-        for line in f:
-            users.append(line.strip())
+    try:
+        with open(data) as f:
+            for line in f:
+                users.append(line.strip())
+    except FileNotFoundError:
+        print(f"Cann't find {template}")
     return users
